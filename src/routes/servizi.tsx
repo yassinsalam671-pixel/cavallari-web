@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Wrench, Flame, AlertTriangle, FileCheck, Droplets, Bath, ShowerHead, Thermometer } from "lucide-react";
-import { SiteLayout, WA_LINK } from "@/components/SiteLayout";
+import { Wrench, Flame, AlertTriangle, FileCheck, Droplets, Bath, ShowerHead, Thermometer, Phone } from "lucide-react";
+import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/servizi")({
   head: () => ({
     meta: [
       { title: "Servizi — Cavallari Dario Impianti Idraulici" },
-      { name: "description", content: "Impianti idraulici, manutenzione caldaie, riparazioni urgenti e preventivi gratuiti a Ghedi e provincia di Brescia." },
+      { name: "description", content: "Impianti idraulici, manutenzione caldaie, riparazioni urgenti e preventivi gratuiti entro 48 ore a Ghedi e provincia di Brescia." },
       { property: "og:title", content: "I nostri servizi — Cavallari Dario" },
       { property: "og:description", content: "Tutti i servizi idraulici e termoidraulici a Ghedi (BS)." },
       { property: "og:url", content: "/servizi" },
@@ -20,7 +20,7 @@ const services = [
   { icon: Wrench, title: "Impianti idraulici", text: "Progettazione, installazione e ristrutturazione completa di impianti idraulici civili e per piccole attività. Lavori a regola d'arte con materiali certificati." },
   { icon: Flame, title: "Manutenzione caldaie", text: "Controlli periodici, pulizia, sostituzione componenti e bollino blu. Manteniamo la tua caldaia efficiente e a norma di legge." },
   { icon: AlertTriangle, title: "Riparazioni urgenti", text: "Perdite d'acqua, scarichi otturati, guasti improvvisi: interveniamo rapidamente per risolvere il problema in giornata." },
-  { icon: FileCheck, title: "Preventivi gratuiti", text: "Sopralluogo gratuito e senza impegno. Ti forniamo un preventivo chiaro, dettagliato e trasparente prima di iniziare." },
+  { icon: FileCheck, title: "Preventivi gratuiti", text: "Sopralluogo gratuito e senza impegno. Ti forniamo un preventivo chiaro e dettagliato entro 48 ore." },
   { icon: Bath, title: "Ristrutturazione bagni", text: "Realizziamo bagni completi: dalla rimozione dei vecchi sanitari alla posa di nuovi rivestimenti e impianti." },
   { icon: Thermometer, title: "Riscaldamento", text: "Installazione e assistenza per impianti di riscaldamento, radiatori, valvole termostatiche e sistemi a pavimento." },
   { icon: Droplets, title: "Addolcitori e filtri", text: "Installazione di addolcitori, filtri e sistemi di trattamento acqua per proteggere impianti ed elettrodomestici." },
@@ -57,15 +57,13 @@ function Servizi() {
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 text-center md:flex-row md:justify-between md:text-left">
           <div>
             <h2 className="font-display text-2xl font-bold md:text-3xl">Richiedi un preventivo gratuito</h2>
-            <p className="text-primary-foreground/85">Sopralluogo senza impegno. Risposta rapida.</p>
+            <p className="text-primary-foreground/85">Chiamaci direttamente: risposta entro 48 ore.</p>
           </div>
           <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-md bg-whatsapp px-6 py-3 text-sm font-semibold text-whatsapp-foreground hover:opacity-90"
+            href={PHONE_LINK}
+            className="inline-flex items-center gap-2 rounded-md bg-background px-6 py-3 text-sm font-semibold text-primary hover:opacity-90"
           >
-            Contattaci su WhatsApp
+            <Phone size={18} /> Chiama {PHONE_DISPLAY}
           </a>
         </div>
       </section>
