@@ -43,17 +43,27 @@ function Servizi() {
 
       <section className="mx-auto max-w-6xl px-4 py-14">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ icon: Icon, title, text }) => (
-            <div key={title} className="rounded-xl border border-border bg-card p-6 shadow-sm">
+          {services.map(({ icon: Icon, title, text }, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
+              whileHover={{ y: -4 }}
+              className="rounded-xl border border-border bg-card p-6 shadow-sm"
+            >
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-accent text-primary">
                 <Icon size={24} />
               </div>
               <h2 className="mt-4 font-display text-lg font-bold">{title}</h2>
               <p className="mt-2 text-sm text-muted-foreground">{text}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
+
+      <Gallery title="Foto dei nostri interventi" subtitle="Esempi reali di impianti, sanitari e installazioni realizzate." />
 
       <section className="bg-primary py-12 text-primary-foreground">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 text-center md:flex-row md:justify-between md:text-left">
