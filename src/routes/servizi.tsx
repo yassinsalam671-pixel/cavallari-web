@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Wrench, Flame, AlertTriangle, FileCheck, Droplets, Bath, ShowerHead, Thermometer, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
+import { Gallery } from "@/components/Gallery";
 
 export const Route = createFileRoute("/servizi")({
   head: () => ({

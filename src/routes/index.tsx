@@ -104,6 +104,8 @@ function Home() {
         </div>
       </section>
 
+      <Gallery />
+
       <section className="bg-secondary/40 py-16">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mb-10 text-center">
