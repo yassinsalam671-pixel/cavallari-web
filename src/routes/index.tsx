@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Star, Wrench, Flame, AlertTriangle, FileCheck, ShieldCheck, Clock, MapPin, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
+import { Gallery } from "@/components/Gallery";
+import heroImg from "@/assets/lavoro-tubi.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
