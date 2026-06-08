@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Star, Wrench, Flame, AlertTriangle, FileCheck, ShieldCheck, Clock, MapPin, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
+import { Gallery } from "@/components/Gallery";
+import heroImg from "@/assets/lavoro-tubi.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,18 +61,23 @@ function Home() {
               <span className="flex items-center gap-2"><FileCheck size={18} /> Preventivi gratuiti</span>
             </div>
           </div>
-          <div className="hidden items-center justify-center md:flex">
-            <div className="rounded-2xl bg-white/10 p-8 backdrop-blur">
-              <div className="flex items-center gap-1 text-accent-gold">
-                {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" size={24} />)}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="relative hidden items-center justify-center md:flex"
+          >
+            <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/20">
+              <img src={heroImg} alt="Idraulico al lavoro su impianto in rame" width={1280} height={896} className="h-auto w-full object-cover" />
+              <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-4 text-foreground backdrop-blur">
+                <div className="flex items-center gap-1 text-accent-gold">
+                  {[...Array(5)].map((_, i) => <Star key={i} fill="currentColor" size={18} />)}
+                </div>
+                <p className="mt-1 text-sm font-semibold">5,0 / 5,0 su Google</p>
+                <p className="text-xs text-muted-foreground">Recensioni verificate dei clienti</p>
               </div>
-              <p className="mt-3 text-2xl font-bold">5,0 / 5,0</p>
-              <p className="text-sm text-primary-foreground/80">Valutazione media su Google</p>
-              <p className="mt-4 text-sm text-primary-foreground/90">
-                "Dario è un professionista serio, puntuale e onesto. Lo consigliamo a chiunque cerchi un idraulico di fiducia nella zona di Ghedi."
-              </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -95,6 +103,8 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <Gallery />
 
       <section className="bg-secondary/40 py-16">
         <div className="mx-auto max-w-6xl px-4">
