@@ -1,23 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { Star, Wrench, Flame, AlertTriangle, FileCheck, ShieldCheck, Clock, MapPin, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
 import { Gallery } from "@/components/Gallery";
 import heroImg from "@/assets/lavoro-tubi.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Cavallari Dario Impianti Idraulici — Idraulico a Ghedi (BS)" },
-      { name: "description", content: "Idraulico di fiducia a Ghedi e provincia di Brescia. Impianti idraulici, manutenzione caldaie, riparazioni urgenti e preventivi gratuiti entro 48 ore." },
-      { property: "og:title", content: "Cavallari Dario Impianti Idraulici — Ghedi (BS)" },
-      { property: "og:description", content: "Idraulico professionista a Ghedi. Preventivi gratuiti entro 48 ore, interventi rapidi." },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: Home,
-});
+import { useEffect } from "react";
 
 const reviews = [
   { name: "Marco B.", text: "Intervento rapido e professionale. Ha riparato la caldaia in poche ore. Consigliatissimo!" },
@@ -25,7 +12,10 @@ const reviews = [
   { name: "Giuseppe T.", text: "Ho rifatto tutto l'impianto bagno con lui. Risultato impeccabile, super disponibile." },
 ];
 
-function Home() {
+export default function Home() {
+  useEffect(() => {
+    document.title = "Cavallari Dario Impianti Idraulici — Idraulico a Ghedi (BS)";
+  }, []);
   return (
     <SiteLayout>
       <section className="relative overflow-hidden bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
