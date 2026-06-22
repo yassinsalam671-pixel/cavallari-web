@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import path from "node:path";
 
 export default defineConfig({
-  base: "./",
+  base: "/cavallari-web/",
   plugins: [react(), tailwindcss(), tsconfigPaths()],
   resolve: {
     alias: {
