@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { Phone, MapPin, Mail } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -7,14 +7,14 @@ export const PHONE_DISPLAY = "+39 335 544 6891";
 export const PHONE_LINK = "tel:+393355446891";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/servizi", label: "Servizi" },
-  { to: "/contatti", label: "Contatti" },
+  { to: "/", label: "Home", end: true },
+  { to: "/servizi", label: "Servizi", end: false },
+  { to: "/contatti", label: "Contatti", end: false },
 ] as const;
 
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { pathname } = useLocation();
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
@@ -25,15 +25,18 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {nav.map((n) => (
-              <Link
+              <NavLink
                 key={n.to}
                 to={n.to}
-                className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-primary"
-                activeProps={{ className: "bg-accent text-primary" }}
-                activeOptions={{ exact: n.to === "/" }}
+                end={n.end}
+                className={({ isActive }) =>
+                  `rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-primary ${
+                    isActive ? "bg-accent text-primary" : "text-foreground/80"
+                  }`
+                }
               >
                 {n.label}
-              </Link>
+              </NavLink>
             ))}
             <a
               href={PHONE_LINK}
@@ -56,16 +59,19 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <div className="border-t border-border bg-background md:hidden">
             <div className="mx-auto flex max-w-6xl flex-col px-4 py-2">
               {nav.map((n) => (
-                <Link
+                <NavLink
                   key={n.to}
                   to={n.to}
+                  end={n.end}
                   onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-3 text-sm font-medium text-foreground/80 hover:bg-accent"
-                  activeProps={{ className: "bg-accent text-primary" }}
-                  activeOptions={{ exact: n.to === "/" }}
+                  className={({ isActive }) =>
+                    `rounded-md px-3 py-3 text-sm font-medium hover:bg-accent ${
+                      isActive ? "bg-accent text-primary" : "text-foreground/80"
+                    }`
+                  }
                 >
                   {n.label}
-                </Link>
+                </NavLink>
               ))}
               <a
                 href={PHONE_LINK}

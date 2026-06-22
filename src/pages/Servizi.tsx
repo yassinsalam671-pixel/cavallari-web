@@ -1,22 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { Wrench, Flame, AlertTriangle, FileCheck, Droplets, Bath, ShowerHead, Thermometer, Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
 import { Gallery } from "@/components/Gallery";
-
-export const Route = createFileRoute("/servizi")({
-  head: () => ({
-    meta: [
-      { title: "Servizi — Cavallari Dario Impianti Idraulici" },
-      { name: "description", content: "Impianti idraulici, manutenzione caldaie, riparazioni urgenti e preventivi gratuiti entro 48 ore a Ghedi e provincia di Brescia." },
-      { property: "og:title", content: "I nostri servizi — Cavallari Dario" },
-      { property: "og:description", content: "Tutti i servizi idraulici e termoidraulici a Ghedi (BS)." },
-      { property: "og:url", content: "/servizi" },
-    ],
-    links: [{ rel: "canonical", href: "/servizi" }],
-  }),
-  component: Servizi,
-});
 
 const services = [
   { icon: Wrench, title: "Impianti idraulici", text: "Progettazione, installazione e ristrutturazione completa di impianti idraulici civili e per piccole attività. Lavori a regola d'arte con materiali certificati." },
@@ -29,7 +15,10 @@ const services = [
   { icon: ShowerHead, title: "Sanitari e rubinetterie", text: "Sostituzione di sanitari, miscelatori, rubinetterie e accessori per il bagno con marchi di qualità." },
 ];
 
-function Servizi() {
+export default function Servizi() {
+  useEffect(() => {
+    document.title = "Servizi — Cavallari Dario Impianti Idraulici";
+  }, []);
   return (
     <SiteLayout>
       <section className="border-b border-border bg-secondary/40 py-14">

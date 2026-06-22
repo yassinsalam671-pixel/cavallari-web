@@ -1,22 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { useEffect } from "react";
 import { SiteLayout, PHONE_LINK, PHONE_DISPLAY } from "@/components/SiteLayout";
 
-export const Route = createFileRoute("/contatti")({
-  head: () => ({
-    meta: [
-      { title: "Contatti — Cavallari Dario Impianti Idraulici Ghedi" },
-      { name: "description", content: "Contatta Cavallari Dario Impianti Idraulici a Ghedi (BS). Telefono, email e indirizzo. Preventivi entro 48 ore." },
-      { property: "og:title", content: "Contatti — Cavallari Dario" },
-      { property: "og:description", content: "Idraulico a Ghedi (BS): chiamaci direttamente per un preventivo entro 48 ore." },
-      { property: "og:url", content: "/contatti" },
-    ],
-    links: [{ rel: "canonical", href: "/contatti" }],
-  }),
-  component: Contatti,
-});
-
-function Contatti() {
+export default function Contatti() {
+  useEffect(() => {
+    document.title = "Contatti — Cavallari Dario Impianti Idraulici Ghedi";
+  }, []);
   return (
     <SiteLayout>
       <section className="border-b border-border bg-secondary/40 py-14">
