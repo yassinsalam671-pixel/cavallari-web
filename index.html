@@ -1,30 +1,535 @@
-<!doctype html>
-<html lang="it">
-  <head>
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantor Garage | Bespoke Automotive Ateliers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      (function() {
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
-          history.replaceState(null, null, redirect);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA8C2C',
+                        },
+                        darkBg: '#0a0a0a',
+                        cardBg: '#121212',
+                        borderDark: '#262626'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
         }
-      })();
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cavallari Dario Impianti Idraulici — Ghedi (BS)</title>
-    <meta name="description" content="Idraulico di fiducia a Ghedi e provincia di Brescia. Impianti, caldaie, riparazioni urgenti, preventivi gratuiti." />
-    <meta name="author" content="Cavallari Dario Impianti Idraulici" />
-    <meta property="og:title" content="Cavallari Dario Impianti Idraulici — Ghedi (BS)" />
-    <meta property="og:description" content="Idraulico di fiducia a Ghedi e provincia di Brescia. Impianti, caldaie, riparazioni urgenti, preventivi gratuiti." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8C2C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .gold-border:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 font-sans antialiased selection:bg-gold selection:text-black">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/90 backdrop-blur-md border-b border-borderDark transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="#" class="text-2xl font-bold tracking-widest uppercase flex items-center gap-2">
+                    <span class="text-gold font-light">VANTOR</span> <span class="text-white font-semibold">GARAGE</span>
+                </a>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm uppercase tracking-wider font-medium text-gray-300">
+                <a href="#hero" class="hover:text-gold transition-colors">Home</a>
+                <a href="#catalogo" class="hover:text-gold transition-colors">Collezione</a>
+                <a href="#brand" class="hover:text-gold transition-colors">Brand</a>
+                <a href="#artigianato" class="hover:text-gold transition-colors">Atelier</a>
+                <a href="#contatti" class="hover:text-gold transition-colors">Contatti</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#catalogo" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-gold hover:bg-gold-light transition-all rounded-sm shadow-lg">
+                    Richiedi Preventivo
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-gold focus:outline-none text-xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-borderDark px-6 py-4 space-y-3">
+            <a href="#hero" class="block text-sm uppercase tracking-wider hover:text-gold py-1">Home</a>
+            <a href="#catalogo" class="block text-sm uppercase tracking-wider hover:text-gold py-1">Collezione</a>
+            <a href="#brand" class="block text-sm uppercase tracking-wider hover:text-gold py-1">Brand</a>
+            <a href="#artigianato" class="block text-sm uppercase tracking-wider hover:text-gold py-1">Atelier</a>
+            <a href="#contatti" class="block text-sm uppercase tracking-wider hover:text-gold py-1">Contatti</a>
+            <div class="pt-2">
+                <a href="#catalogo" class="block w-full text-center py-2 text-xs font-semibold uppercase tracking-wider text-black bg-gold rounded-sm">
+                    Richiedi Preventivo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-b from-black via-[#0d0d0d] to-darkBg">
+        <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold/10 via-transparent to-transparent pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/30 bg-gold/5 text-gold text-xs uppercase tracking-widest mb-6">
+                <i class="fa-solid fa-crown text-[10px]"></i> Bespoke Automotive Artistry
+            </div>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 leading-tight">
+                Eleganza Estrema <br><span class="gold-gradient-text">Senza Compromessi</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-gray-400 text-base sm:text-lg mb-10 font-light leading-relaxed">
+                Volanti sportivi artigianali in fibra di carbonio, Alcantara premium e cerchi in lega forgiati su misura per ridefinire l'abitacolo della tua vettura di prestigio.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#catalogo" class="w-full sm:w-auto px-8 py-4 bg-gold hover:bg-gold-light text-black font-semibold text-sm uppercase tracking-wider rounded-sm transition-all shadow-xl hover:scale-105">
+                    Esplora il Catalogo
+                </a>
+                <a href="#artigianato" class="w-full sm:w-auto px-8 py-4 border border-gold/40 hover:border-gold text-white hover:text-gold font-semibold text-sm uppercase tracking-wider rounded-sm transition-all">
+                    Scopri l'Atelier
+                </a>
+            </div>
+
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-borderDark pt-10 text-left">
+                <div class="p-4 border-l border-gold/30">
+                    <span class="block text-2xl font-bold text-gold">100%</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Fatto su Misura</span>
+                </div>
+                <div class="p-4 border-l border-gold/30">
+                    <span class="block text-2xl font-bold text-gold">Carbonio</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Alto Modulo & Forgiato</span>
+                </div>
+                <div class="p-4 border-l border-gold/30">
+                    <span class="block text-2xl font-bold text-gold">OEM+</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Integrazione Perfetta</span>
+                </div>
+                <div class="p-4 border-l border-gold/30">
+                    <span class="block text-2xl font-bold text-gold">Spedizione</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Assicurata Mondiale</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Selection -->
+    <section id="brand" class="py-20 bg-cardBg border-y border-borderDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Compatibilità d'Eccellenza</h2>
+                <p class="text-3xl font-bold uppercase">Seleziona il Tuo Brand</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Brand Card -->
+                <button onclick="filterByBrand('Mercedes')" class="brand-filter-btn group relative h-48 rounded-lg overflow-hidden border border-borderDark hover:border-gold transition-all bg-black/60 p-6 flex flex-col justify-between text-left">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0"></div>
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-xs text-gray-400 uppercase tracking-widest">Atelier</span>
+                        <i class="fa-solid fa-arrow-right text-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition-colors">Mercedes</h3>
+                        <p class="text-xs text-gray-400 mt-1">AMG & Luxury Line</p>
+                    </div>
+                </button>
+
+                <button onclick="filterByBrand('Audi')" class="brand-filter-btn group relative h-48 rounded-lg overflow-hidden border border-borderDark hover:border-gold transition-all bg-black/60 p-6 flex flex-col justify-between text-left">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0"></div>
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-xs text-gray-400 uppercase tracking-widest">Atelier</span>
+                        <i class="fa-solid fa-arrow-right text-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition-colors">Audi</h3>
+                        <p class="text-xs text-gray-400 mt-1">RS & Performance</p>
+                    </div>
+                </button>
+
+                <button onclick="filterByBrand('BMW')" class="brand-filter-btn group relative h-48 rounded-lg overflow-hidden border border-borderDark hover:border-gold transition-all bg-black/60 p-6 flex flex-col justify-between text-left">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0"></div>
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-xs text-gray-400 uppercase tracking-widest">Atelier</span>
+                        <i class="fa-solid fa-arrow-right text-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition-colors">BMW</h3>
+                        <p class="text-xs text-gray-400 mt-1">M Series & Sport</p>
+                    </div>
+                </button>
+
+                <button onclick="filterByBrand('Volkswagen')" class="brand-filter-btn group relative h-48 rounded-lg overflow-hidden border border-borderDark hover:border-gold transition-all bg-black/60 p-6 flex flex-col justify-between text-left">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0"></div>
+                    <div class="relative z-10 flex justify-between items-start w-full">
+                        <span class="text-xs text-gray-400 uppercase tracking-widest">Atelier</span>
+                        <i class="fa-solid fa-arrow-right text-gold opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold text-white group-hover:text-gold transition-colors">Volkswagen</h3>
+                        <p class="text-xs text-gray-400 mt-1">GTI & R Line</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="catalogo" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <h2 class="text-xs uppercase tracking-widest text-gold font-semibold mb-2">Collezione Esclusiva</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold uppercase">Galleria & Modelli</h3>
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="mt-6 md:mt-0 flex flex-wrap gap-2">
+                <button onclick="filterProducts('all')" id="btn-all" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm bg-gold text-black transition-all">Tutti</button>
+                <button onclick="filterProducts('steering')" id="btn-steering" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm bg-cardBg border border-borderDark text-gray-300 hover:border-gold transition-all">Volanti</button>
+                <button onclick="filterProducts('wheels')" id="btn-wheels" class="px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm bg-cardBg border border-borderDark text-gray-300 hover:border-gold transition-all">Cerchi in Lega</button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Items injected dynamically via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section id="artigianato" class="py-24 bg-cardBg border-y border-borderDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-xs uppercase tracking-widest text-gold font-semibold mb-2 block">Maestria Artigianale</span>
+                <h2 class="text-3xl sm:text-4xl font-bold uppercase mb-6">L'Arte della Personalizzazione</h2>
+                <p class="text-gray-400 font-light mb-6 leading-relaxed">
+                    Ogni creazione firmata Vantor Garage nasce da un meticoloso processo di lavorazione artigianale italiana. Dalla selezione dei pellami più pregiati come l'Alcantara originale di麂皮 alla laminazione in fibra di carbonio alto modulo con finitura opaca o lucida.
+                </p>
+                <ul class="space-y-4 text-gray-300 text-sm">
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold"></i><span>Display Race LED integrati programmabili con telemetria</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold"></i><span>Cuciture a mano personalizzabili (colore a scelta)</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-check text-gold"></i><span>Cerchi forgiati monoblocco leggeri e resistenti alle massime sollecitazioni</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative h-96 rounded-lg overflow-hidden border border-borderDark group">
+                <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80" alt="Luxury Carbon Steering Wheel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/121212/D4AF37?text=Vantor+Atelier'">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-8">
+                    <div>
+                        <span class="text-xs text-gold uppercase tracking-widest">Bespoke Department</span>
+                        <h4 class="text-xl font-bold">Finiture su Richiesta</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contatti" class="py-16 bg-black border-t border-borderDark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <a href="#" class="text-2xl font-bold tracking-widest uppercase flex items-center gap-2 mb-4">
+                    <span class="text-gold font-light">VANTOR</span> <span class="text-white font-semibold">GARAGE</span>
+                </a>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Atelier di personalizzazione automobilistica di lusso per volanti sportivi e cerchi in lega su misura.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://instagram.com" target="_blank" class="w-10 h-10 rounded-full bg-cardBg border border-borderDark flex items-center justify-center text-gray-300 hover:text-gold hover:border-gold transition-all">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://whatsapp.com" target="_blank" class="w-10 h-10 rounded-full bg-cardBg border border-borderDark flex items-center justify-center text-gray-300 hover:text-gold hover:border-gold transition-all">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold uppercase tracking-wider text-white mb-4">Brand Supportati</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#catalogo" class="hover:text-gold transition-colors">Mercedes-Benz / AMG</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold transition-colors">Audi / RS Series</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold transition-colors">BMW / M Power</a></li>
+                    <li><a href="#catalogo" class="hover:text-gold transition-colors">Volkswagen / GTI & R</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-semibold uppercase tracking-wider text-white mb-4">Orari Atelier & Contatti</h4>
+                <p class="text-sm text-gray-400 mb-2">Lun - Ven: 09:00 - 19:00</p>
+                <p class="text-sm text-gray-400 mb-4">Milano, Italia</p>
+                <a href="https://wa.me/393331234567" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black bg-gold hover:bg-gold-light px-4 py-2.5 rounded-sm transition-all">
+                    <i class="fa-brands fa-whatsapp"></i> Contatta su WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-borderDark text-center text-xs text-gray-500">
+            &copy; 2026 Vantor Garage. Tutti i diritti riservati. Showroom digitale non e-commerce.
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/393331234567" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-600 hover:bg-green-500 text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl transition-all hover:scale-110" aria-label="Contatta su WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Quote Request Modal -->
+    <div id="quote-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-cardBg border border-borderDark max-w-lg w-full rounded-lg p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeQuoteModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-widest text-gold font-semibold">Richiesta Preventivo</span>
+                <h3 id="modal-product-title" class="text-2xl font-bold uppercase mt-1">Configurazione Articolo</h3>
+            </div>
+            
+            <form id="quote-form" onsubmit="submitQuote(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Modello Auto & Anno</label>
+                    <input type="text" required placeholder="Es. Audi RS6 C8 (2023)" class="w-full bg-black border border-borderDark rounded-sm px-4 py-3 text-sm text-white focus:border-gold focus:outline-none">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Nome e Cognome</label>
+                        <input type="text" required placeholder="Mario Rossi" class="w-full bg-black border border-borderDark rounded-sm px-4 py-3 text-sm text-white focus:border-gold focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Telefono / WhatsApp</label>
+                        <input type="tel" required placeholder="+39 333 0000000" class="w-full bg-black border border-borderDark rounded-sm px-4 py-3 text-sm text-white focus:border-gold focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-300 mb-1">Note Personalizzate / Finiture</label>
+                    <textarea rows="3" placeholder="Specifica finiture in carbonio opaco, cuciture rosse, display LED..." class="w-full bg-black border border-borderDark rounded-sm px-4 py-3 text-sm text-white focus:border-gold focus:outline-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-4 bg-gold hover:bg-gold-light text-black font-semibold text-xs uppercase tracking-widest rounded-sm transition-all shadow-lg">
+                    Invia Richiesta Preventivo
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-cardBg border border-gold text-white px-6 py-4 rounded-sm shadow-2xl hidden transform transition-all duration-300">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-gold text-lg"></i>
+            <div>
+                <h4 class="text-xs uppercase tracking-wider font-semibold">Richiesta Inviata</h4>
+                <p id="toast-msg" class="text-xs text-gray-400">Ti ricontatteremo al più presto con il preventivo personalizzato.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Product Catalog Data
+        const products = [
+            {
+                id: 1,
+                name: "Carbon Race LED Steering Wheel",
+                category: "steering",
+                brand: "Mercedes",
+                priceText: "Preventivo su Misura",
+                specs: "Carbonio Forgiato • Alcantara • Display LED",
+                image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
+                desc: "Volante sportivo ergonomico con display race integrato, bilancieri in carbonio maggiorati e rivestimento in Alcantara."
+            },
+            {
+                id: 2,
+                name: "Forged Monoblock Alloy Wheels",
+                category: "wheels",
+                brand: "Mercedes",
+                priceText: "Preventivo su Misura",
+                specs: "21 pollici • Nero Opaco • Alluminio Forgiato 6061-T6",
+                image: "https://images.unsplash.com/photo-1600790934353-8109d65f5d4e?auto=format&fit=crop&w=800&q=80",
+                desc: "Cerchi in lega forgiati ultraleggeri progettati specificamente per piattaforme Mercedes-AMG ad alte prestazioni."
+            },
+            {
+                id: 3,
+                name: "RS Performance Alcantara Steering",
+                category: "steering",
+                brand: "Audi",
+                priceText: "Preventivo su Misura",
+                specs: "Carbonio Lucido • Marcatore Rosso • Pelle Perf",
+                image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+                desc: "Design squadrato con marcatore a ore 12 rosso vermiglio, cuciture a contrasto e impugnatura anatomica avanzata."
+            },
+            {
+                id: 4,
+                name: "M-Power Carbon Edition Steering",
+                category: "steering",
+                brand: "BMW",
+                priceText: "Preventivo su Misura",
+                specs: "Pelle Nappa • Carbonio Opaco • Paddle Shift",
+                image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+                desc: "Stile M personalizzato con dettagli tricolore ricamati a mano e fibra di carbonio opaca antiriflesso."
+            },
+            {
+                id: 5,
+                name: "GTI Clubsport Steering Wheel",
+                category: "steering",
+                brand: "Volkswagen",
+                priceText: "Preventivo su Misura",
+                specs: "Alcantara Nera • Inserti Rosso GTI • Logo Custom",
+                image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+                desc: "Ottimizzato per Volkswagen Golf GTI e R, garantisce grip eccellente e un look racing senza compromessi."
+            },
+            {
+                id: 6,
+                name: "Concave Forged Alloy Wheels",
+                category: "wheels",
+                brand: "Audi",
+                priceText: "Preventivo su Misura",
+                specs: "20 pollici • Bronzo Spazzolato • Design Concavo",
+                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80",
+                desc: "Cerchi forgiati con profilo concavo aggressivo, finitura spazzolata a mano con trasparente protettivo ceramico."
+            }
+        ];
+
+        let currentFilter = 'all';
+        let currentBrand = 'all';
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => {
+                const matchCat = currentFilter === 'all' || p.category === currentFilter;
+                const matchBrand = currentBrand === 'all' || p.brand === currentBrand;
+                return matchCat && matchBrand;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-400">Nessun articolo trovato per i filtri selezionati.</div>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'group bg-cardBg border border-borderDark hover:border-gold transition-all duration-300 rounded-lg overflow-hidden flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-64 overflow-hidden bg-black">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/121212/D4AF37?text=Vantor+Garage'">
+                            <span class="absolute top-4 left-4 bg-black/80 backdrop-blur-sm border border-gold/40 text-gold text-[10px] uppercase tracking-wider px-3 py-1 rounded-sm">
+                                ${p.brand}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-gray-400 uppercase tracking-widest block mb-1">${p.specs}</span>
+                            <h4 class="text-xl font-bold uppercase mb-2 group-hover:text-gold transition-colors">${p.name}</h4>
+                            <p class="text-xs text-gray-400 leading-relaxed mb-4">${p.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="openQuoteModal('${p.name}')" class="w-full py-3 bg-cardBg border border-gold/60 hover:bg-gold hover:text-black hover:border-gold text-gold font-semibold text-xs uppercase tracking-wider rounded-sm transition-all flex items-center justify-center gap-2">
+                            <span>Richiedi Preventivo</span> <i class="fa-solid fa-arrow-right-long"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(cat) {
+            currentFilter = cat;
+            // Update buttons styling
+            ['all', 'steering', 'wheels'].forEach(c => {
+                const btn = document.getElementById(`btn-${c}`);
+                if(c === cat) {
+                    btn.className = "px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm bg-gold text-black transition-all";
+                } else {
+                    btn.className = "px-4 py-2 text-xs uppercase tracking-wider font-semibold rounded-sm bg-cardBg border border-borderDark text-gray-300 hover:border-gold transition-all";
+                }
+            });
+            renderProducts();
+        }
+
+        function filterByBrand(brandName) {
+            currentBrand = currentBrand === brandName ? 'all' : brandName;
+            
+            // Scroll smoothly to catalog
+            document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+            renderProducts();
+        }
+
+        // Quote Modal Functions
+        const modal = document.getElementById('quote-modal');
+        const modalTitle = document.getElementById('modal-product-title');
+
+        function openQuoteModal(productName) {
+            modalTitle.innerText = `Preventivo: ${productName}`;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuoteModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function submitQuote(e) {
+            e.preventDefault();
+            closeQuoteModal();
+            
+            // Show toast notification
+            const toast = document.getElementById('toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
+            
+            document.getElementById('quote-form').reset();
+        }
+
+        // Initialize Catalog on Load
+        window.onload = function() {
+            renderProducts();
+        };
+    </script>
+</body>
 </html>
