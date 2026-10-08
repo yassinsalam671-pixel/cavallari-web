@@ -375,7 +375,7 @@
                 brand: "Mercedes",
                 priceText: "Preventivo su Misura",
                 specs: "Carbonio Forgiato • Alcantara • Display LED",
-                image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80",
+                image: "./images/carbon-race-led.jpg",
                 desc: "Volante sportivo ergonomico con display race integrato, bilancieri in carbonio maggiorati e rivestimento in Alcantara."
             },
             {
@@ -385,7 +385,7 @@
                 brand: "Mercedes",
                 priceText: "Preventivo su Misura",
                 specs: "21 pollici • Nero Opaco • Alluminio Forgiato 6061-T6",
-                image: "https://images.unsplash.com/photo-1600790934353-8109d65f5d4e?auto=format&fit=crop&w=800&q=80",
+                image: "./images/forged-monoblock.jpg",
                 desc: "Cerchi in lega forgiati ultraleggeri progettati specificamente per piattaforme Mercedes-AMG ad alte prestazioni."
             },
             {
@@ -395,7 +395,7 @@
                 brand: "Audi",
                 priceText: "Preventivo su Misura",
                 specs: "Carbonio Lucido • Marcatore Rosso • Pelle Perf",
-                image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+                image: "./images/rs-alcantara.jpg",
                 desc: "Design squadrato con marcatore a ore 12 rosso vermiglio, cuciture a contrasto e impugnatura anatomica avanzata."
             },
             {
@@ -405,7 +405,7 @@
                 brand: "BMW",
                 priceText: "Preventivo su Misura",
                 specs: "Pelle Nappa • Carbonio Opaco • Paddle Shift",
-                image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+                image: "./images/m-power-carbon.jpg",
                 desc: "Stile M personalizzato con dettagli tricolore ricamati a mano e fibra di carbonio opaca antiriflesso."
             },
             {
@@ -415,7 +415,7 @@
                 brand: "Volkswagen",
                 priceText: "Preventivo su Misura",
                 specs: "Alcantara Nera • Inserti Rosso GTI • Logo Custom",
-                image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+                image: "./images/gti-clubsport.jpg",
                 desc: "Ottimizzato per Volkswagen Golf GTI e R, garantisce grip eccellente e un look racing senza compromessi."
             },
             {
@@ -425,7 +425,7 @@
                 brand: "Audi",
                 priceText: "Preventivo su Misura",
                 specs: "20 pollici • Bronzo Spazzolato • Design Concavo",
-                image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80",
+                image: "./images/concave-forged.jpg",
                 desc: "Cerchi forgiati con profilo concavo aggressivo, finitura spazzolata a mano con trasparente protettivo ceramico."
             }
         ];
@@ -454,7 +454,7 @@
                 card.innerHTML = `
                     <div>
                         <div class="relative h-64 overflow-hidden bg-black">
-                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/121212/D4AF37?text=Vantor+Garage'">
+                            <img src="${p.image}" alt="${p.name}" loading="lazy" width="768" height="768" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                             <span class="absolute top-4 left-4 bg-black/80 backdrop-blur-sm border border-gold/40 text-gold text-[10px] uppercase tracking-wider px-3 py-1 rounded-sm">
                                 ${p.brand}
                             </span>
